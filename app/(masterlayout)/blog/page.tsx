@@ -67,7 +67,7 @@ const blogs = [
 const page = (props: Props) => {
   return (
     <div className="py-3">
-      <div className="container mx-auto p-4">
+      <div className=" mx-auto p-4">
         <div className="py-3 ps-5 flex items-center justify-between">
           <h1 className="text-2xl font-semibold mb-4 first-letter:text-3xl">
             Latest Blogs

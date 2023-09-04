@@ -1,14 +1,13 @@
-"use client";
+import React from 'react'
 
-import React, { useState } from "react";
-
-type Props = {};
+type Props = {}
 
 const Sidebar = (props: Props) => {
-  const [open, setOpen] = useState(false);
-  const toggleSidebar = () => {
-    setOpen(!open);
-  };
-  return <div className={`${open ? "w-64" : "w-0"} bg-blue-200`}></div>;
-};
-export default Sidebar;
+  return (
+    <div className='bg-inherit w-72 shadow-lg h-full'>
+      hello
+    </div>
+  )
+}
+
+export default Sidebar
