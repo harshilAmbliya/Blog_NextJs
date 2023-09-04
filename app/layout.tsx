@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 
-import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,9 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <ThemeProvider attribute="class" defaultTheme="dark">
-        <body>{children}</body>
-      </ThemeProvider>
+      <body>{chilren}</body>
     </html>
   );
 }
