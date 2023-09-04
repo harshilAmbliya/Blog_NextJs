@@ -1,25 +1,18 @@
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SIdebarData from "@/components/SIdebarData";
 import Sidebar from "@/components/Sidebar";
-import React from "react";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="bg-[#f5f5f5]">
-    
-      <main className=" text-[#333333] flex ">
-        <Sidebar />
-        <div className="w-full">
-          <Navbar />
-          {children}
-        </div>
-      </main>
-      <footer className="bg-[#008080]">
-        <Footer />
-      </footer>
+    <div className="flex">
+      <Sidebar />
+      <div className="flex-1 min-h-screen ">
+        <Navbar />
+        <main className="p-4">
+          <div className="container mx-auto">{children}</div>
+        </main>
+      </div>
     </div>
   );
 };
 
-export default layout;
+export default Layout;
