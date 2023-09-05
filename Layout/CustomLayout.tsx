@@ -1,21 +1,32 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const CustomLayout = (props: Props) => {
+  const [open, setOpen] = useState(false);
+  const handleToggle = () => {
+    setOpen(!open);
+    console.log(open);
+  };
   return (
     <>
-      <div className="flex h-screen">
-        <div className="w-72 bg-white overflow-y-auto">
+      <div className="flex h-screen ">
+        <div
+          className={`${
+            open ? "w-72" : "w-0"
+          } bg-gray-300 ease-in-out overflow-hidden`}
+        >
           <Sidebar />
         </div>
-        <div className="flex flex-col flex-1">
-          <Navbar />
-          <div className="bg-green-500 flex justify-between items-center py-3 border-b-2 border-gray-500">
+        <div className="flex h-screen overflow-scroll flex-col flex-1">
+          <Navbar toggle={handleToggle} />
+          {/* <div className="flex justify-between items-center py-3  ">
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
               aut tenetur repellendus?
@@ -24,7 +35,7 @@ const CustomLayout = (props: Props) => {
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi
               quibusdam necessitatibus, doloribus error molestias blanditiis.
             </p>
-          </div>
+          </div> */}
           <div className="overflow-y-auto">{props.children}</div>
         </div>
       </div>
