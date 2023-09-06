@@ -1,15 +1,32 @@
+import prisma from "@/prisma/prismadb";
 import { NextRequest, NextResponse } from "next/server";
-
+type UserType = {
+    username: string
+    password: string
+    email: string
+}
 export const POST = async (req: NextRequest, res: NextResponse) => {
-    type data = {
-        username:string
+    try {
+        await prisma.$connect()
+        const Userdatacredentials: UserType = await req.json();
+        const { username, password, email } = Userdatacredentials;
+
+        const user: UserType = await prisma.user.create({
+            data: {
+                username,
+                password,
+                email,
+            }
+        })
+
+        return NextResponse.json({ data: user }, { status: 200 });
+    } catch (error) {
+        console.error("Error creating user:", error);
+        return NextResponse.json({ error: "Failed to create user" }, { status: 500 });
     }
-    const data = req.json();
-    const{username,password} =data;
-    const user = await prisma.user.create({
-        data:{
-            username,password
-        }
-    })
-    return NextResponse.json({ data: user }, { status: 200 });
+    finally {
+        await prisma.$disconnect()
+    }
+
+
 }
