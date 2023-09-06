@@ -1,5 +1,6 @@
 import prisma from "@/prisma/prismadb";
 import { NextRequest, NextResponse } from "next/server";
+import bcrypt from 'bcryptjs'
 type UserType = {
     username: string
     password: string
@@ -10,11 +11,12 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         await prisma.$connect()
         const Userdatacredentials: UserType = await req.json();
         const { username, password, email } = Userdatacredentials;
-
+        const hashedPassword = await bcrypt.hash(password, 10)
+        console.log(hashedPassword)
         const user: UserType = await prisma.user.create({
             data: {
                 username,
-                password,
+                password: hashedPassword,
                 email,
             }
         })

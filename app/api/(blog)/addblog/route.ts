@@ -1,7 +1,7 @@
 // import prisma from "@/prisma/prismadb";
 // import { NextRequest, NextResponse } from "next/server";
 import { Session, getServerSession } from "next-auth";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "../../(auth)/auth/[...nextauth]/route";
 // // import session from
 // type BlogType = {
 //     title: string
