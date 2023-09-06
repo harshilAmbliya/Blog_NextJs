@@ -20,7 +20,7 @@ const page = ({ params }: { params: { id: string } }) => {
   };
 
   return (
-    <div className="text-3xl text-center container">
+    <div className="text-3xl text-center ">
       <div className="p-6 ">
         <p>{id}</p>
         <h1 className="text-2xl font-semibold mb-4">{blogData.title}</h1>
@@ -29,7 +29,7 @@ const page = ({ params }: { params: { id: string } }) => {
         <img
           src={blogData.imageUrl} // Replace with your blog post image URL
           alt="Blog Post Cover"
-          className="w-full  rounded-lg"
+          className="w-full  rounded-lg p-28"
         />
         <div className="mt-4">
           <p className="text-gray-700">
