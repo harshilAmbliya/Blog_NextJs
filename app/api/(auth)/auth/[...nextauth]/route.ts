@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/prisma/prismadb";
 import bcrypt from 'bcryptjs'
-import { NextResponse } from "next/server";
+
 
 interface Request {
     login: Promise<Credentials>;
@@ -15,9 +15,10 @@ interface Credentials {
     password: string;
 }
 
+
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
-    
+
     providers: [
         // GoogleProvider({
         //     clientId: process.env.CLIENT_ID!,
@@ -31,8 +32,8 @@ export const authOptions: AuthOptions = {
             //     return credentials
             // }
             authorize: async (req: Request) => {
-                const email = await req.email
-                const password = await req.password
+                const email: string = await req.email
+                const password: string = await req.password
                 if (!email || !password) {
                     throw new Error("Missing credentials");
                 }
@@ -47,12 +48,12 @@ export const authOptions: AuthOptions = {
                     throw new Error("Invalid Email or Password")
                 }
                 const hashedPassword = await bcrypt.compare(password, user.password)
-                if (password !== hashedPassword) {
+                if (!hashedPassword) {
                     console.log("invalid password")
-                  throw new Error("invalid Password")
+                    throw new Error("invalid Password")
                 }
 
-                console.log("valid user",user.username)
+                console.log("valid user", user.username)
                 console.log(user)
                 return user
             }
@@ -62,10 +63,24 @@ export const authOptions: AuthOptions = {
         strategy: "jwt",
     },
     secret: process.env.SECRET!,
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.Id = user.id
+                // token.name = user.name
+                token.email = user.email
+                console.log('Token with id:', token);
+            }
+            return token
+        },
+        // async session({ session, token }) {
+        //     // session.user.id =
+        //     console.log(token.email)
+        // }
 
 
-};
-
+    }
+}
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
