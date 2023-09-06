@@ -6,9 +6,8 @@ export const GET = async (res: NextResponse) => {
     try {
         await prisma.$connect()
         const sessiondata = await getServerSession(authOptions)
-        const session = await prisma.session.findMany();
-        console.log(sessiondata)
-        return NextResponse.json({ session: session }, { status: 200 })
+
+        return NextResponse.json({ session: sessiondata }, { status: 200 })
 
     } catch (error) {
         await prisma.$disconnect()
