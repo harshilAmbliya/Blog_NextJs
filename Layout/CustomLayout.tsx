@@ -1,5 +1,6 @@
 "use client";
 
+import Dashboard from "@/components/Dashboard";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import React, { useState } from "react";
@@ -16,7 +17,7 @@ const CustomLayout = (props: Props) => {
   };
   return (
     <>
-      <div className="flex ">
+      {/* <div className="flex ">
         <div
           className={`${
             open ? "w-72" : "hidden"
@@ -32,7 +33,14 @@ const CustomLayout = (props: Props) => {
 
           <div>{props.children}</div>
         </div>
+      </div> */}
+      <div className="flex">
+      <Sidebar />
+      <div className="flex-1 h-screen overflow-y-scroll">
+        <Navbar  />
+        <Dashboard />
       </div>
+    </div>
     </>
   );
 };
