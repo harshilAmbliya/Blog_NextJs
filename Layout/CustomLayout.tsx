@@ -1,7 +1,7 @@
 "use client";
 
 import Dashboard from "@/components/Dashboard";
-import Navbar from "@/components/Navbar";
+import { StickyNavbar } from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import React, { useState } from "react";
 
@@ -35,12 +35,15 @@ const CustomLayout = (props: Props) => {
         </div>
       </div> */}
       <div className="flex">
-      <Sidebar />
-      <div className="flex-1 h-screen overflow-y-scroll" style={{overflowY:"scroll"}}>
-        <Navbar  />
-        <Dashboard />
+        <Sidebar />
+        <div
+          className="flex-1 h-screen overflow-y-scroll"
+          style={{ overflowY: "scroll" }}
+        >
+          <StickyNavbar />
+          <Dashboard />
+        </div>
       </div>
-    </div>
     </>
   );
 };

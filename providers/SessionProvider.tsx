@@ -2,13 +2,17 @@
 
 import React from "react";
 import { SessionProvider } from "next-auth/react";
-import { Session } from "inspector";
+import { ThemeProvider } from "@material-tailwind/react";
 type Props = {
   children: React.ReactNode;
 };
 
 const Provider = (props: Props) => {
-  return <SessionProvider>{props.children}</SessionProvider>;
+  return (
+    <ThemeProvider>
+      <SessionProvider>{props.children}</SessionProvider>
+    </ThemeProvider>
+  );
 };
 
 export default Provider;

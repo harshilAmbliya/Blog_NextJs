@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import { AiOutlinePartition, AiFillHome } from "react-icons/ai";
@@ -147,85 +147,85 @@ const Sidebar = (props: Props) => {
     //   )}
     // </aside>
     <aside
-    className={`${
-      isOpen ? 'w-64 ' : 'w-16'
-    } bg-gray-200 text-gray-800 p-4 transition-all duration-100 ease-in-out relative overflow-y-hidden`}
-  >
-    <button
       className={`${
-        isOpen ? 'absolute top-4 right-4 ' : 'absolute top-4 left-4'
-      } text-gray-800 hover:text-blue-500`}
-      onClick={toggleSidebar}
+        isOpen ? "w-64 " : "w-16"
+      } bg-gray-200 text-gray-800 p-4 transition-all duration-100 hidden lg:block ease-in-out relative overflow-y-hidden`}
     >
-      {isOpen ? (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      ) : (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16m-7 6h7"
-          />
-        </svg>
+      <button
+        className={`${
+          isOpen ? "absolute top-4 right-4 " : "absolute top-4 left-4"
+        } text-gray-800 hover:text-blue-500`}
+        onClick={toggleSidebar}
+      >
+        {isOpen ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        )}
+      </button>
+      {isOpen && (
+        <>
+          <div className="text-2xl font-semibold mb-4 ">Dashboard Menu</div>
+          <div className="overflow-y-auto max-h-[calc(100vh-7rem)]">
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="block hover:text-blue-500">
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block hover:text-blue-500">
+                  Posts
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block hover:text-blue-500">
+                  Categories
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block hover:text-blue-500">
+                  Tags
+                </a>
+              </li>
+              {/* Add more menu items here */}
+            </ul>
+          </div>
+        </>
       )}
-    </button>
-    {isOpen && (
-      <>
-        <div className="text-2xl font-semibold mb-4 ">Dashboard Menu</div>
-        <div className="overflow-y-auto max-h-[calc(100vh-7rem)]">
-          <ul className="space-y-2">
-            <li>
-              <a href="#" className="block hover:text-blue-500">
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block hover:text-blue-500">
-                Posts
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block hover:text-blue-500">
-                Categories
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block hover:text-blue-500">
-                Tags
-              </a>
-            </li>
-            {/* Add more menu items here */}
-          </ul>
-        </div>
-      </>
-    )}
-    {isOpen && (
-      <div
-        className="fixed inset-0 bg-gray-40 z-50"
-        onClick={closeSidebar}
-      ></div>
-    )}
-  </aside>
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-gray-40 z-50"
+          onClick={closeSidebar}
+        ></div>
+      )}
+    </aside>
   );
 };
 

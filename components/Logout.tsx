@@ -1,26 +1,27 @@
-"use client"
+"use client";
 
-import React from 'react'
-import { Button } from './ui/button'
-import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import React from "react";
+// import { Button } from './ui/button'
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { Button } from "@material-tailwind/react";
 
-type Props = {}
+type Props = {};
 
 const Logout = (props: Props) => {
-    const router = useRouter()
-    const handleLogout = () => {
-        signOut({
-            callbackUrl: "/login",
-            redirect: false
-        })
-        router.push("/login")
-    }
-    return (
-        <div>
-            <Button onClick={handleLogout}>Logout</Button>
-        </div>
-    )
-}
+  const router = useRouter();
+  const handleLogout = () => {
+    signOut({
+      callbackUrl: "/login",
+      redirect: false,
+    });
+    router.push("/login");
+  };
+  return (
+    <div>
+      <Button onClick={handleLogout}>Logout</Button>
+    </div>
+  );
+};
 
-export default Logout
+export default Logout;
