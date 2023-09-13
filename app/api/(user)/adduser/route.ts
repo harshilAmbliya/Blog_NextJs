@@ -9,8 +9,8 @@ type UserType = {
 export const POST = async (req: NextRequest, res: NextResponse) => {
     try {
         await prisma.$connect()
-        const Userdatacredentials: UserType = await req.json();
-        const { username, password, email } = Userdatacredentials;
+        const { username, password, email }: UserType = await req.json();
+        console.log(username, password, email )
         const hashedPassword = await bcrypt.hash(password, 10)
         console.log(hashedPassword)
         const user: UserType = await prisma.user.create({

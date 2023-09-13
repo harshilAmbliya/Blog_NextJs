@@ -17,13 +17,16 @@ const LoginForm = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(data);
-    signIn("credentials", {
-      email:data.email,
-      password:data.password,
+    
+    const user = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
       redirect: false,
     });
-    
+    console.log("user",user)
+    if(user?.error === null){
+      router.push("/blog")
+    }
   };
 
   return (
