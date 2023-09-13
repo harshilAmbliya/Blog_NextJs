@@ -1,16 +1,19 @@
 import React from "react";
-import LoginForm from "@/components/Login";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/(auth)/auth/[...nextauth]/route";
+import Logout from "@/components/Logout";
 type Props = {};
 
 const page = async (props: Props) => {
   const session = await getServerSession(authOptions);
   return (
     <div>
-      hello
-      {(session?.user.id, session?.user.name)}
-      <LoginForm />
+      {(session?.user.id, session?.user.email)}
+      <pre>
+        {session?.user.name}
+      </pre>
+     
+      <Logout />
     </div>
   );
 };

@@ -148,12 +148,12 @@ const Sidebar = (props: Props) => {
     // </aside>
     <aside
     className={`${
-      isOpen ? 'w-64' : 'w-16'
-    } bg-blue-200 text-gray-800 p-4 transition-all duration-100 ease-in-out relative overflow-y-hidden`}
+      isOpen ? 'w-64 ' : 'w-16'
+    } bg-gray-200 text-gray-800 p-4 transition-all duration-100 ease-in-out relative overflow-y-hidden`}
   >
     <button
       className={`${
-        isOpen ? 'absolute top-4 right-4' : 'absolute top-4 left-4'
+        isOpen ? 'absolute top-4 right-4 ' : 'absolute top-4 left-4'
       } text-gray-800 hover:text-blue-500`}
       onClick={toggleSidebar}
     >
@@ -191,7 +191,7 @@ const Sidebar = (props: Props) => {
     </button>
     {isOpen && (
       <>
-        <div className="text-2xl font-semibold mb-4">Dashboard Menu</div>
+        <div className="text-2xl font-semibold mb-4 ">Dashboard Menu</div>
         <div className="overflow-y-auto max-h-[calc(100vh-7rem)]">
           <ul className="space-y-2">
             <li>
@@ -221,7 +221,7 @@ const Sidebar = (props: Props) => {
     )}
     {isOpen && (
       <div
-        className="fixed inset-0 bg-gray-400 opacity-20 z-50"
+        className="fixed inset-0 bg-gray-40 z-50"
         onClick={closeSidebar}
       ></div>
     )}

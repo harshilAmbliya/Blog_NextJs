@@ -5,9 +5,9 @@ declare module 'next-auth' {
         user: {
             id: string;
             name: string | null | undefined;
-            email: string;
+            email: string | null | undefined;
             image: string | null | undefined;
-            // Add any other custom properties you need
+          
         };
     }
 }

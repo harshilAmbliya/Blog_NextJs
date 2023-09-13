@@ -36,7 +36,7 @@ const CustomLayout = (props: Props) => {
       </div> */}
       <div className="flex">
       <Sidebar />
-      <div className="flex-1 h-screen overflow-y-scroll">
+      <div className="flex-1 h-screen overflow-y-scroll" style={{overflowY:"scroll"}}>
         <Navbar  />
         <Dashboard />
       </div>

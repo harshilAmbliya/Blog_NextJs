@@ -1,18 +1,15 @@
-import NextAuth, { AuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth, { AuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/prisma/prismadb";
 import bcrypt from 'bcryptjs'
 
 
-interface Request {
-    login: Promise<Credentials>;
-}
+
 
 interface Credentials {
-    username: string;
-    password: string;
+    email: string | undefined;
+    password: string | undefined;
 }
 
 
@@ -31,9 +28,9 @@ export const authOptions: AuthOptions = {
             //     const credentials:Credentials = await request.login
             //     return credentials
             // }
-            authorize: async (req: Request) => {
-                const email: string = await req.email
-                const password: string = await req.password
+            authorize: async (credentials: Credentials) => {
+                const email = credentials.email;
+                const password = credentials.password;
                 if (!email || !password) {
                     throw new Error("Missing credentials");
                 }
@@ -42,21 +39,22 @@ export const authOptions: AuthOptions = {
                     where: {
                         email
                     }
-                })
+                });
                 if (!user) {
-                    console.log("user not found")
-                    throw new Error("Invalid Email or Password")
+                    console.log("user not found");
+                    throw new Error("Invalid Email or Password");
                 }
-                const hashedPassword = await bcrypt.compare(password, user.password)
+                const hashedPassword = await bcrypt.compare(password, user.password);
                 if (!hashedPassword) {
-                    console.log("invalid password")
-                    throw new Error("invalid Password")
+                    console.log("invalid password");
+                    throw new Error("invalid Password");
                 }
 
-                console.log("valid user", user.username)
-                console.log(user)
-                return user
-            }
+                console.log("valid user", user.username);
+                console.log(user);
+                return user;
+            },
+            undefined
         })
     ],
     session: {
@@ -67,18 +65,19 @@ export const authOptions: AuthOptions = {
         async jwt({ token, user }) {
             if (user) {
                 token.Id = user.id
-                // token.name = user.name
                 token.email = user.email
-                console.log('Token with id:', token);
             }
             return token
         },
-        // async session({ session, token }) {
-        //     // session.user.id =
-        //     console.log(token.email)
-        // }
-
-
+        async session({ session, token,user }) {
+            if (token) {
+                
+                session.user.id = user.id
+                session.user.email = token.email
+            }
+           console.log("sessions",session)
+            return session
+        }
     }
 }
 const handler = NextAuth(authOptions);
