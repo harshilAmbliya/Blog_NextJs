@@ -1,6 +1,7 @@
 import Provider from "@/providers/SessionProvider";
 import "./globals.css";
 import type { Metadata } from "next";
+import {  SimpleFooter } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Provider>
-        <body>{children}</body>
+        <body className="bg-gray-200">
+          {children}
+          {/* <SimpleFooter /> */}
+        </body>
       </Provider>
     </html>
   );
