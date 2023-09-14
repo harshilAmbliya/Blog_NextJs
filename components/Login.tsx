@@ -25,7 +25,7 @@ const LoginForm = () => {
     });
     console.log("user",user)
     if(user?.error === null){
-      router.push("/blog")
+      router.push("/")
     }
   };
 
