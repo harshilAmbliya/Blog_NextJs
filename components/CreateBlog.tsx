@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const BlogAddPage: React.FC = () => {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     title: "",
     image: "",
@@ -23,14 +26,10 @@ const BlogAddPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch("api/blog/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-    console.log(formData);
+    const response = await axios.post("/api/blog/create",formData);
+    if (response.status === 201) {
+      router.push("/allblogs")
+    }
   };
 
   return (

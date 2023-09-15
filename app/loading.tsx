@@ -5,7 +5,7 @@ type Props = {};
 
 const loading = (props: Props) => {
   return (
-    <div>
+    <div className="flex items-center justify-center h-screen">
       <Spin />
     </div>
   );

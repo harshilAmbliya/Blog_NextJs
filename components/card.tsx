@@ -6,12 +6,10 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-type CardProps = {
-  cardkey: number;
-};
+type CardProps = {};
 export function SimpleCard(props: CardProps) {
   return (
-    <div className="bg-white rounded-lg" key={props.cardkey}>
+    <div className="bg-white rounded-lg ">
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
           UI/UX Review Check
