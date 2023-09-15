@@ -15,7 +15,7 @@ const page = async (props: Props) => {
   const data = [1, 2, 3, 4, 5];
   const session = await getServerSession(authOptions);
   return (
-    <div>
+    <div className="">
       {/* {(session?.user.id, session?.user.email)}
       <pre>{session?.user.name}</pre> */}
       <StickyNavbar />
