@@ -19,6 +19,7 @@ module.exports = withMT({
         "2xl": "1400px",
       },
     },
+
     extend: {
       colors: {
         border: "hsl(var(--border))",
