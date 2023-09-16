@@ -36,7 +36,7 @@ export function BlogRelatedData() {
   const handleOpen2 = (value: any) => setOpen2(open2 === value ? 0 : value);
 
   return (
-    <div className="container py-16 px-5">
+    <div className="container  px-5">
       <div className="flex items-center justify-center  flex-col  space-y-4">
         <div className=" bg-white p-8 rounded-lg ">
           <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>

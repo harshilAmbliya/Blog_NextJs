@@ -46,6 +46,7 @@ import {
   Button,
   IconButton,
   Card,
+  Collapse,
 } from "@material-tailwind/react";
 import Logout from "./Logout";
 import Link from "next/link";
@@ -156,13 +157,13 @@ export function StickyNavbar() {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           {/* <Button variant="gradient" size="sm" fullWidth className="mb-2">
             <span>Buy Now</span>
           </Button> */}
           <Logout />
-        </MobileNav>
+        </Collapse>
       </Navbar>
     </div>
   );
