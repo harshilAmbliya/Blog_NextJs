@@ -2,6 +2,8 @@ import Provider from "@/providers/SessionProvider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { SimpleFooter } from "@/components/Footer";
+import { StickyNavbar } from "@/components/Navbar";
+import { WhatsappMenu } from "@/components/WhatsappMenu";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,8 +19,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="bg-gray-200">
         <Provider>
+          <StickyNavbar />
           {children}
-          {/* <SimpleFooter /> */}
+          <WhatsappMenu />
+
+          <SimpleFooter />
         </Provider>
       </body>
     </html>

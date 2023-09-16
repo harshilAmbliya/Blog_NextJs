@@ -1,41 +1,42 @@
-import React from "react";
+import prisma from "@/prisma/prismadb";
+import { Oswald } from "next/font/google";
 
-const page = ({ params }: { params: { id: string } }) => {
+const font = Oswald({ subsets: ["latin"] });
+const page = async ({ params }: { params: { id: string } }) => {
   const id = params.id;
-  const blogData = {
-    id: 1,
-    title: "The Art of Cooking",
-    author: "John Doe",
-    date: "September 10, 2023",
-    imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmVhY3QlMjBqc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    content: `
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum libero in nisl ullamcorper, at luctus lorem congue.
-            Nullam et diam eu turpis vulputate suscipit a eget justo. Nulla facilisi.
-      
-            Vivamus gravida, felis at scelerisque auctor, felis odio tincidunt purus, eu dapibus tortor erat nec nunc.
-            Sed sit amet quam a orci efficitur fermentum id eget neque.
-      
-            Integer a lectus eget lorem rhoncus dictum ac in quam. Nulla facilisi. Duis efficitur risus vel urna ullamcorper, eu tincidunt purus volutpat.
-          `,
-  };
-
+  const blog = await prisma.blog.findUnique({
+    where: {
+      id,
+    },
+  });
+  // const blogUser = await prisma.user.findUnique({
+  //   where:{
+  //     id:blog?.userId
+  //   }
+  // })
+  // console.log("blog",blog,"user",blogUser);
+  if (!blog) {
+    return <div>Blog post not found</div>;
+  }
   return (
-    <div className="text-3xl text-center ">
+    <div className={`${font.className} text-2xl tracking-widest `}>
       <div className="p-6 ">
-        <p>{id}</p>
-        <h1 className="text-2xl font-semibold mb-4">{blogData.title}</h1>
-        <p className="text-gray-600 mb-2">{blogData.date}</p>
-        <p className="text-gray-600 mb-4">{blogData.author}</p>
-        <img
-          src={blogData.imageUrl} // Replace with your blog post image URL
-          alt="Blog Post Cover"
-          className="w-full  rounded-lg p-28"
-        />
-        <div className="mt-4">
-          <p className="text-gray-700">
-            {blogData.content}
+        <div className="  flex items-center justify-evenly">
+          <img
+            src={blog?.image} // Replace with your blog post image URL
+            alt={blog?.title}
+            className="w-2/4  rounded-lg p-11"
+          />
+          <div className="py-8 text-center">
+            <p className="text-gray-600 mb-2 font-bold py-6">{blog?.slug}</p>
+            <p className="text-gray-600 mb-2">{blog?.title}</p>
+          </div>
+        </div>
+
+        <div className=" mt-4">
+          <p className="text-gray-800 text-lg leading-relaxed first-letter:text-3xl px-8 ">
+            {blog?.description}
           </p>
-       
         </div>
       </div>
     </div>
