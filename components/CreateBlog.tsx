@@ -26,9 +26,10 @@ const BlogAddPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await axios.post("/api/blog/create",formData);
+    const response = await axios.post("/api/addblog",formData);
+    console.log(response)
     if (response.status === 201) {
-      router.push("/allblogs")
+      router.push("/")
     }
   };
 

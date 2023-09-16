@@ -4,8 +4,9 @@ import { Typography } from "@material-tailwind/react";
  
 export function SimpleFooter() {
   return (
-    <footer className="flex container w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between">
-      <Typography color="blue-gray" className="font-normal">
+    <div className=" bg-blue-gray-400">
+      <footer className="flex container w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 py-6 text-center md:justify-between">
+      <Typography color="blue-gray" className="font-normal text-gray-200">
         &copy; 2023 Material Tailwind
       </Typography>
       <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
@@ -14,7 +15,7 @@ export function SimpleFooter() {
             as="a"
             href="#"
             color="blue-gray"
-            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+            className="font-normal text-gray-200 transition-colors hover:text-white focus:text-white"
           >
             About Us
           </Typography>
@@ -24,7 +25,7 @@ export function SimpleFooter() {
             as="a"
             href="#"
             color="blue-gray"
-            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+            className="font-normal text-gray-200 transition-colors hover:text-white focus:text-white"
           >
             License
           </Typography>
@@ -34,7 +35,7 @@ export function SimpleFooter() {
             as="a"
             href="#"
             color="blue-gray"
-            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+            className="font-normal text-gray-200 transition-colors hover:text-white focus:text-white"
           >
             Contribute
           </Typography>
@@ -44,12 +45,13 @@ export function SimpleFooter() {
             as="a"
             href="#"
             color="blue-gray"
-            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+            className="font-normal text-gray-200 transition-colors hover:text-white focus:text-white"
           >
             Contact Us
           </Typography>
         </li>
       </ul>
     </footer>
+    </div>
   );
 }

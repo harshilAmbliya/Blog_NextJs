@@ -5,24 +5,38 @@ import {
   CardFooter,
   Typography,
   Button,
+  CardHeader,
 } from "@material-tailwind/react";
-type CardProps = {};
+import Link from "next/link";
+interface BlogData {
+  id: string;
+  image: string;
+  description: string;
+  slug: string;
+  title: string;
+  userId?: string ;
+}
+type CardProps = {
+  blog: BlogData;
+};
 export function SimpleCard(props: CardProps) {
   return (
-    <div className="bg-white rounded-lg ">
+    <div className="bg-white rounded-lg object-cover h-80 relative  py-4 ">
+      {/* <CardHeader>
+        <img src={props.blog?.image ?? ""} alt={props.blog.title} />
+      </CardHeader> */}
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
-          UI/UX Review Check
+          {props.blog.title}
         </Typography>
-        <Typography>
-          The place is close to Barceloneta Beach and bus stop just 2 min by
-          walk and near to &quot;Naviglio&quot; where you can enjoy the main
-          night life in Barcelona...
-        </Typography>
+        <Typography>{`${props.blog.description.slice(0, 200)}...`}</Typography>
       </CardBody>
-      <CardFooter className="pt-0">
-        <Button>Read More</Button>
-      </CardFooter>
+      <Link
+        href={`/blog/${props.blog.id}`}
+        className="py-0  absolute bottom-2 px-5"
+      >
+        <Button className="w-full">Read More</Button>
+      </Link>
     </div>
   );
 }

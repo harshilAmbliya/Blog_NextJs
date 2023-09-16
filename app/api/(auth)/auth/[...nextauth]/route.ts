@@ -73,6 +73,7 @@ export const authOptions: AuthOptions = {
         token.id = user.id;
         token.email = user?.email;
       }
+      // console.log(token)
       return token;
     },
     async session({ session, token }) {
@@ -81,6 +82,7 @@ export const authOptions: AuthOptions = {
         session.user.id = token.id as string | undefined;
         session.user.email = token.email;
       }
+      // console.log(session)
       return session;
     },
   },

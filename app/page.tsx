@@ -10,35 +10,36 @@ import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
+import { SimpleFooter } from "@/components/Footer";
+import Testimonials from "@/components/Testimonials";
 type Props = {};
 interface BlogData {
-  id: number;
+  id: string;
   title: string;
   slug: string;
   image: string;
   description: string;
 }
 const page = async (props: Props) => {
-  const data = await axios.get("http://localhost:3000//api/blog");
-  const blogs = await data.data;
-  console.log(blogs);
+  const data = await axios.get("http://localhost:3000/api/blog");
+  const blogs: BlogData[] = await data.data;
+
   // const session = await getServerSession(authOptions);
   return (
     <div className="">
       {/* {(session?.user.id, session?.user.email)}
       <pre>{session?.user.name}</pre> */}
-      <StickyNavbar />
+      
       <div className="">
         <WhatsappMenu />
       </div>
       <CustomCrousel />
       <BlogRelatedData />
-      <WhatsappMenu />
 
       <div className=" container ">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl text-gray-800 py-8 px-6 font-bold">
-            All blogs
+            Top Blogs
           </h2>
           <Link href={"/blog/addblog"}>
             <Button>
@@ -49,18 +50,25 @@ const page = async (props: Props) => {
             </Button>
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
-          {blogs.map((blog: any) => {
-            return (
-              <div key={blog.id}>
-                <Link href={`/blog/${blog.id}`}>
-                  <SimpleCard />
-                </Link>
-              </div>
-            );
-          })}
+        <div className="py-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-8">
+            {blogs.slice(0, 10).map((blog: BlogData) => {
+              return (
+                <div key={blog.id}>
+                  <SimpleCard blog={blog} />
+                </div>
+              );
+            })}
+          </div>
+          <Link href={'/blog'}>
+            <Button className=" flex items-center justify-center text-center mx-auto py-2 px-5">
+              Show More
+            </Button>
+          </Link>
         </div>
+        <Testimonials />
       </div>
+      <SimpleFooter />
     </div>
   );
 };

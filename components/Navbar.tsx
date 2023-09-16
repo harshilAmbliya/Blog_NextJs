@@ -70,9 +70,9 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Pages
-        </a>
+        <Link href="/" className="flex items-center">
+          Home
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -80,9 +80,9 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Account
-        </a>
+        <Link href="/blog" className="flex items-center">
+          Blogs
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -90,9 +90,9 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Blocks
-        </a>
+        <Link href="about" className="flex items-center">
+          About
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -100,15 +100,15 @@ export function StickyNavbar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Docs
-        </a>
+        <Link href="/contact" className="flex items-center">
+          Contact
+        </Link>
       </Typography>
     </ul>
   );
 
   return (
-    <div className=" max-h-[768px] overflow-y-scroll ">
+    <div className=" max-h-[768px] ">
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none py-2 lg:px-8 lg:py-4 ">
         <div className="flex items-center justify-between text-blue-gray-900 px-10">
           <Link href="/" className="mr-4 cursor-pointer py-1.5 font-medium">
