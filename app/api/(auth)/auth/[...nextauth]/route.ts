@@ -1,21 +1,27 @@
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth, { AuthOptions, ISODateString } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/prisma/prismadb";
 import bcrypt from "bcryptjs";
+import { JWT } from "next-auth/jwt";
+
 
 interface Credentials {
   email: string | undefined;
   password: string | undefined;
 }
 
-// interface Token {
-//   id: string | undefined;
-//   email: string | undefined;
-//   name: string | undefined;
-//   role: string | undefined;
-//   image: string | undefined;
-// }
+export interface CustomUser {
+  id?: string | null;
+  email?: string | null;
+  name?: string | null;
+  role?: string | null;
+  image?: string | null;
+}
+export interface CustomSession {
+  user?: CustomUser;
+  expiresDate?: ISODateString
+}
 
 // interface User extends Token {
 //   password: string | undefined;
@@ -31,9 +37,9 @@ export const authOptions: AuthOptions = {
     // }),
     CredentialsProvider({
       name: "login",
-      authorize: async (credentials: Credentials) => {
-        const email = credentials.email;
-        const password = credentials.password;
+      authorize: async (credentials: Credentials | null) => {
+        const email = credentials?.email;
+        const password = credentials?.password;
         if (!email || !password) {
           throw new Error("Missing credentials");
         }
@@ -62,27 +68,30 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
+  pages: {
+    signIn: "/login"
+  },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
   secret: process.env.SECRET!,
   callbacks: {
-    async jwt({ user, token, account, profile }) {
-      if (account) {
-        token.name = user.name;
-        token.id = user.id;
-        token.email = user?.email;
+    async jwt({ token, user }: {
+      token: JWT;
+      user: CustomUser | null;
+    }) {
+      if (user) {
+        user.role = user?.role ?? "user"
+        token.user = user;
       }
       // console.log(token)
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: CustomSession; token: JWT }) {
       if (token) {
-        session.user.name = token.name;
-        session.user.id = token.id as string | undefined;
-        session.user.email = token.email;
+        session.user = token.user as CustomUser
+
       }
-      // console.log(session)
       return session;
     },
   },
